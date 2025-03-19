@@ -89,7 +89,7 @@ function getPowerFunction(exponent) {
  *   getPolynom()      => null
  */
 function getPolynom(...coefficients) {
-  if (coefficients.length === 0) return null;
+  if (coefficients.length === 0) return () => {};
   return (x) =>
     coefficients.reduce(
       (acc, coef, index) => acc + coef * x ** (coefficients.length - 1 - index),
@@ -139,7 +139,7 @@ function memoize(func) {
  * retryer() => 2
  */
 function retry(func, attempts) {
-  return function () {
+  return () => {
     let lastError;
     for (let i = 0; i < attempts; i += 1) {
       try {
@@ -221,7 +221,7 @@ function partialUsingArguments(fn, ...args1) {
  */
 function getIdGeneratorFunction(startFrom) {
   let currentId = startFrom;
-  return function () {
+  return () => {
     const id = currentId;
     currentId += 1;
     return id;
